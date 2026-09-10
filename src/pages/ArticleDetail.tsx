@@ -33,9 +33,15 @@ export default function ArticleDetail() {
       </header>
 
       <article className="space-y-4 rounded-2xl border border-stone-200 bg-white p-6 leading-relaxed text-stone-700 sm:p-8">
-        {article.content.map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
+        {article.content.map((paragraph, i) =>
+          paragraph.startsWith('## ') ? (
+            <h2 key={i} className="pt-2 text-xl font-bold text-stone-800">
+              {paragraph.slice(3)}
+            </h2>
+          ) : (
+            <p key={i}>{paragraph}</p>
+          ),
+        )}
       </article>
 
       <div className="rounded-2xl bg-green-50 p-6 text-center">
