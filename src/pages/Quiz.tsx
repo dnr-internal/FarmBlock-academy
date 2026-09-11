@@ -109,8 +109,8 @@ export default function Quiz() {
               onClick={() => setCategoryId('tong-hop')}
               className={`rounded-xl border p-3 text-left text-sm font-medium transition ${
                 categoryId === 'tong-hop'
-                  ? 'border-green-600 bg-green-50 text-green-800'
-                  : 'border-stone-200 bg-white text-stone-600 hover:border-green-300'
+                  ? 'border-brand-600 bg-brand-50 text-brand-800'
+                  : 'border-stone-200 bg-white text-stone-600 hover:border-brand-300'
               }`}
             >
               🎯 Tổng hợp
@@ -121,8 +121,8 @@ export default function Quiz() {
                 onClick={() => setCategoryId(cat.id)}
                 className={`rounded-xl border p-3 text-left text-sm font-medium transition ${
                   categoryId === cat.id
-                    ? 'border-green-600 bg-green-50 text-green-800'
-                    : 'border-stone-200 bg-white text-stone-600 hover:border-green-300'
+                    ? 'border-brand-600 bg-brand-50 text-brand-800'
+                    : 'border-stone-200 bg-white text-stone-600 hover:border-brand-300'
                 }`}
               >
                 {cat.icon} {cat.shortName}
@@ -140,7 +140,7 @@ export default function Quiz() {
                 onClick={() => setDifficulty(d)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
                   difficulty === d
-                    ? 'bg-green-600 text-white'
+                    ? 'bg-brand-600 text-white'
                     : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
                 }`}
               >
@@ -159,7 +159,7 @@ export default function Quiz() {
                 onClick={() => setQuestionCount(n)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
                   questionCount === n
-                    ? 'bg-green-600 text-white'
+                    ? 'bg-brand-600 text-white'
                     : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
                 }`}
               >
@@ -179,7 +179,7 @@ export default function Quiz() {
         <button
           disabled={pool.length === 0}
           onClick={startQuiz}
-          className="w-full rounded-full bg-green-600 py-3 font-semibold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-stone-300"
+          className="w-full rounded-full bg-brand-600 py-3 font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-stone-300"
         >
           Bắt đầu làm bài
         </button>
@@ -203,7 +203,7 @@ export default function Quiz() {
 
         <div className="h-2 w-full overflow-hidden rounded-full bg-stone-200">
           <div
-            className="h-full rounded-full bg-green-600 transition-all"
+            className="h-full rounded-full bg-brand-600 transition-all"
             style={{ width: `${((currentIndex + (selected !== null ? 1 : 0)) / questions.length) * 100}%` }}
           />
         </div>
@@ -214,9 +214,9 @@ export default function Quiz() {
           {question.options.map((option, i) => {
             const isCorrect = i === question.correctIndex
             const isSelected = i === selected
-            let stateClass = 'border-stone-200 bg-white hover:border-green-300'
+            let stateClass = 'border-stone-200 bg-white hover:border-brand-300'
             if (selected !== null) {
-              if (isCorrect) stateClass = 'border-green-500 bg-green-50'
+              if (isCorrect) stateClass = 'border-brand-500 bg-brand-50'
               else if (isSelected) stateClass = 'border-red-400 bg-red-50'
               else stateClass = 'border-stone-200 bg-white opacity-60'
             }
@@ -246,7 +246,7 @@ export default function Quiz() {
         <button
           onClick={nextQuestion}
           disabled={selected === null}
-          className="w-full rounded-full bg-green-600 py-3 font-semibold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-stone-300"
+          className="w-full rounded-full bg-brand-600 py-3 font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-stone-300"
         >
           {currentIndex + 1 < questions.length ? 'Câu tiếp theo →' : 'Xem kết quả'}
         </button>
@@ -273,14 +273,14 @@ export default function Quiz() {
         <h1 className="mt-3 text-3xl font-extrabold text-stone-800">
           {score}/{questions.length} câu đúng
         </h1>
-        <p className="mt-1 text-lg font-semibold text-green-700">{percent}%</p>
+        <p className="mt-1 text-lg font-semibold text-brand-700">{percent}%</p>
         <p className="mt-2 text-stone-500">{verdict.text}</p>
       </div>
 
       <div className="flex flex-wrap justify-center gap-3">
         <button
           onClick={reset}
-          className="rounded-full bg-green-600 px-6 py-2.5 font-semibold text-white hover:bg-green-700"
+          className="rounded-full bg-brand-600 px-6 py-2.5 font-semibold text-white hover:bg-brand-700"
         >
           Làm bài khác
         </button>
@@ -305,7 +305,7 @@ export default function Quiz() {
           return (
             <div
               key={q.id}
-              className={`rounded-xl border p-4 text-sm ${correct ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}
+              className={`rounded-xl border p-4 text-sm ${correct ? 'border-brand-200 bg-brand-50' : 'border-red-200 bg-red-50'}`}
             >
               <p className="font-medium text-stone-800">
                 {i + 1}. {q.question}

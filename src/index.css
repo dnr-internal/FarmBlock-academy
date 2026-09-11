@@ -1,5 +1,40 @@
 @import 'tailwindcss';
 
+@theme {
+  --font-sans: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+
+  /* Bảng màu FarmBlock — trích từ Brand Guideline chính thức */
+  --color-brand-50: #ebf2ed;
+  --color-brand-100: #c4d9c8;
+  --color-brand-200: #9dc0a3;
+  --color-brand-300: #75a67e;
+  --color-brand-400: #4e8d59;
+  --color-brand-500: #3a8047;
+  --color-brand-600: #2d6639;
+  --color-brand-700: #204d2b;
+  --color-brand-800: #1a4023;
+  --color-brand-900: #13331c;
+  --color-brand-950: #06280c;
+
+  /* Màu bổ trợ (moss) — dùng cho một số điểm nhấn danh mục */
+  --color-moss-100: #b4e27e;
+  --color-moss-300: #86c046;
+  --color-moss-500: #5a812e;
+  --color-moss-700: #2d4116;
+  --color-moss-900: #06280c;
+
+  /* Màu bổ trợ (xanh công nghệ) — dùng cho nhóm nội dung công nghệ/dữ liệu */
+  --color-tech-100: #dceff4;
+  --color-tech-200: #b9deea;
+  --color-tech-300: #97cedf;
+  --color-tech-400: #74bdd5;
+  --color-tech-500: #51adca;
+  --color-tech-600: #39798d;
+  --color-tech-700: #295765;
+  --color-tech-800: #18343d;
+  --color-tech-900: #081114;
+}
+
 :root {
   color-scheme: light;
 }

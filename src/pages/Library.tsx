@@ -35,14 +35,14 @@ export default function Library() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Tìm bài viết theo từ khóa..."
-        className="w-full rounded-xl border border-stone-300 px-4 py-2.5 text-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100"
+        className="w-full rounded-xl border border-stone-300 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
       />
 
       <div className="flex flex-wrap gap-2">
         <Link
           to="/thu-vien"
           className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
-            !categoryId ? 'bg-green-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+            !categoryId ? 'bg-brand-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
           }`}
         >
           Tất cả
@@ -53,7 +53,7 @@ export default function Library() {
             to={`/thu-vien/${cat.id}`}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
               categoryId === cat.id
-                ? 'bg-green-600 text-white'
+                ? 'bg-brand-600 text-white'
                 : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
             }`}
           >

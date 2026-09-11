@@ -6,7 +6,7 @@ import { quizQuestions } from '../data/quizzes'
 export default function Home() {
   return (
     <div className="space-y-16">
-      <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-green-700 via-green-600 to-lime-600 px-6 py-14 text-white sm:px-12">
+      <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-800 via-brand-700 to-brand-500 px-6 py-14 text-white sm:px-12">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-3 inline-block rounded-full bg-white/15 px-4 py-1 text-sm font-medium">
             Miễn phí • Không quảng cáo • Học mọi lúc
@@ -14,14 +14,14 @@ export default function Home() {
           <h1 className="text-3xl font-extrabold leading-tight sm:text-4xl">
             Tra cứu kiến thức nông nghiệp &amp; công nghệ cao, kiểm tra hiểu biết của bạn
           </h1>
-          <p className="mt-4 text-base text-green-50 sm:text-lg">
+          <p className="mt-4 text-base text-brand-50 sm:text-lg">
             FarmBlock Academy giúp bạn tìm hiểu về trồng trọt, chăn nuôi, IoT, AI, blockchain truy xuất
             nguồn gốc và nông nghiệp bền vững — sau đó làm quiz để tự đánh giá mức độ am hiểu.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               to="/thu-vien"
-              className="rounded-full bg-white px-6 py-3 font-semibold text-green-700 shadow transition hover:bg-green-50"
+              className="rounded-full bg-white px-6 py-3 font-semibold text-brand-700 shadow transition hover:bg-brand-50"
             >
               📚 Khám phá thư viện
             </Link>
@@ -45,7 +45,7 @@ export default function Home() {
       <section>
         <div className="mb-6 flex items-end justify-between">
           <h2 className="text-2xl font-bold text-stone-800">Chủ đề nổi bật</h2>
-          <Link to="/thu-vien" className="text-sm font-medium text-green-700 hover:underline">
+          <Link to="/thu-vien" className="text-sm font-medium text-brand-700 hover:underline">
             Xem tất cả →
           </Link>
         </div>
@@ -61,7 +61,7 @@ export default function Home() {
               >
                 {cat.icon}
               </div>
-              <h3 className="font-semibold text-stone-800 group-hover:text-green-700">{cat.name}</h3>
+              <h3 className="font-semibold text-stone-800 group-hover:text-brand-700">{cat.name}</h3>
               <p className="mt-1.5 text-sm text-stone-500">{cat.description}</p>
             </Link>
           ))}
@@ -76,7 +76,7 @@ export default function Home() {
         </p>
         <Link
           to="/quiz"
-          className="mt-5 inline-block rounded-full bg-green-600 px-6 py-3 font-semibold text-white transition hover:bg-green-700"
+          className="mt-5 inline-block rounded-full bg-brand-600 px-6 py-3 font-semibold text-white transition hover:bg-brand-700"
         >
           Bắt đầu làm quiz
         </Link>
@@ -88,7 +88,7 @@ export default function Home() {
 function Stat({ label, value }: { label: string; value: number | string }) {
   return (
     <div className="rounded-2xl border border-stone-200 bg-white py-5">
-      <div className="text-2xl font-extrabold text-green-700">{value}</div>
+      <div className="text-2xl font-extrabold text-brand-700">{value}</div>
       <div className="mt-1 text-xs font-medium uppercase tracking-wide text-stone-400">{label}</div>
     </div>
   )

@@ -12,7 +12,7 @@ export default function Layout() {
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 border-b border-stone-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-          <NavLink to="/" className="flex items-center gap-2 font-bold text-green-700">
+          <NavLink to="/" className="flex items-center gap-2 font-bold text-brand-700">
             <span className="text-2xl">🌱</span>
             <span className="text-lg leading-tight">
               FarmBlock <span className="font-normal text-stone-500">Academy</span>
@@ -27,7 +27,7 @@ export default function Layout() {
                 className={({ isActive }) =>
                   `rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-green-600 text-white'
+                      ? 'bg-brand-600 text-white'
                       : 'text-stone-600 hover:bg-stone-100 hover:text-stone-900'
                   }`
                 }
@@ -45,7 +45,7 @@ export default function Layout() {
               end={item.end}
               className={({ isActive }) =>
                 `whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                  isActive ? 'bg-green-600 text-white' : 'bg-stone-100 text-stone-600'
+                  isActive ? 'bg-brand-600 text-white' : 'bg-stone-100 text-stone-600'
                 }`
               }
             >

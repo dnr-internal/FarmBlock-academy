@@ -29,7 +29,7 @@ export default function History() {
           <p className="text-stone-400">Bạn chưa làm bài quiz nào.</p>
           <Link
             to="/quiz"
-            className="mt-4 inline-block rounded-full bg-green-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-green-700"
+            className="mt-4 inline-block rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
           >
             Làm quiz đầu tiên
           </Link>
@@ -38,15 +38,15 @@ export default function History() {
         <>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div className="rounded-2xl border border-stone-200 bg-white py-5">
-              <div className="text-2xl font-extrabold text-green-700">{history.length}</div>
+              <div className="text-2xl font-extrabold text-brand-700">{history.length}</div>
               <div className="mt-1 text-xs font-medium uppercase text-stone-400">Lượt làm bài</div>
             </div>
             <div className="rounded-2xl border border-stone-200 bg-white py-5">
-              <div className="text-2xl font-extrabold text-green-700">{bestScore}%</div>
+              <div className="text-2xl font-extrabold text-brand-700">{bestScore}%</div>
               <div className="mt-1 text-xs font-medium uppercase text-stone-400">Điểm cao nhất</div>
             </div>
             <div className="rounded-2xl border border-stone-200 bg-white py-5">
-              <div className="text-2xl font-extrabold text-green-700">{avgScore}%</div>
+              <div className="text-2xl font-extrabold text-brand-700">{avgScore}%</div>
               <div className="mt-1 text-xs font-medium uppercase text-stone-400">Điểm trung bình</div>
             </div>
           </div>
@@ -65,7 +65,7 @@ export default function History() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-green-700">
+                  <p className="font-bold text-brand-700">
                     {h.score}/{h.total}
                   </p>
                   <p className="text-xs text-stone-400">{h.percent}%</p>
