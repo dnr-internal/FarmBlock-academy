@@ -7,16 +7,16 @@ const navItems = [
   { to: '/lich-su', label: 'Kết quả của tôi', end: false },
 ]
 
+const logoSrc = `${import.meta.env.BASE_URL}logo-farmblock.svg`
+
 export default function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-40 border-b border-stone-200 bg-white/90 backdrop-blur">
+      <header className="sticky top-0 z-40 bg-brand-900">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-          <NavLink to="/" className="flex items-center gap-2 font-bold text-brand-700">
-            <span className="text-2xl">🌱</span>
-            <span className="text-lg leading-tight">
-              FarmBlock <span className="font-normal text-stone-500">Academy</span>
-            </span>
+          <NavLink to="/" className="flex items-center gap-2">
+            <img src={logoSrc} alt="FarmBlock" className="h-6 w-auto sm:h-7" />
+            <span className="text-sm font-medium text-brand-200">Academy</span>
           </NavLink>
           <nav className="hidden gap-1 sm:flex">
             {navItems.map((item) => (
@@ -27,8 +27,8 @@ export default function Layout() {
                 className={({ isActive }) =>
                   `rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-brand-600 text-white'
-                      : 'text-stone-600 hover:bg-stone-100 hover:text-stone-900'
+                      ? 'bg-brand-500 text-brand-950'
+                      : 'text-brand-100 hover:bg-brand-800 hover:text-white'
                   }`
                 }
               >
@@ -37,7 +37,7 @@ export default function Layout() {
             ))}
           </nav>
         </div>
-        <nav className="flex gap-1 overflow-x-auto border-t border-stone-100 px-3 py-2 sm:hidden">
+        <nav className="flex gap-1 overflow-x-auto border-t border-brand-800 px-3 py-2 sm:hidden">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -45,7 +45,7 @@ export default function Layout() {
               end={item.end}
               className={({ isActive }) =>
                 `whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                  isActive ? 'bg-brand-600 text-white' : 'bg-stone-100 text-stone-600'
+                  isActive ? 'bg-brand-500 text-brand-950' : 'bg-brand-800 text-brand-100'
                 }`
               }
             >
