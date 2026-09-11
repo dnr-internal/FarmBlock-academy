@@ -14,11 +14,11 @@ export default function ArticleDetail() {
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       <nav className="text-sm text-stone-400">
-        <Link to="/thu-vien" className="hover:text-green-700">
+        <Link to="/thu-vien" className="hover:text-brand-700">
           Thư viện
         </Link>
         {' / '}
-        <Link to={`/thu-vien/${category?.id}`} className="hover:text-green-700">
+        <Link to={`/thu-vien/${category?.id}`} className="hover:text-brand-700">
           {category?.shortName}
         </Link>
       </nav>
@@ -44,11 +44,11 @@ export default function ArticleDetail() {
         )}
       </article>
 
-      <div className="rounded-2xl bg-green-50 p-6 text-center">
-        <p className="font-medium text-green-800">Đã đọc xong? Kiểm tra ngay hiểu biết của bạn!</p>
+      <div className="rounded-2xl bg-brand-50 p-6 text-center">
+        <p className="font-medium text-brand-800">Đã đọc xong? Kiểm tra ngay hiểu biết của bạn!</p>
         <Link
           to={`/quiz/${category?.id}`}
-          className="mt-3 inline-block rounded-full bg-green-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-green-700"
+          className="mt-3 inline-block rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
         >
           Làm quiz chủ đề {category?.shortName} →
         </Link>
@@ -62,7 +62,7 @@ export default function ArticleDetail() {
               <Link
                 key={a.slug}
                 to={`/thu-vien/bai-viet/${a.slug}`}
-                className="rounded-xl border border-stone-200 bg-white p-4 text-sm font-medium text-stone-700 transition hover:border-green-300 hover:text-green-700"
+                className="rounded-xl border border-stone-200 bg-white p-4 text-sm font-medium text-stone-700 transition hover:border-brand-300 hover:text-brand-700"
               >
                 {a.title}
               </Link>
