@@ -58,7 +58,7 @@ export default function History() {
                 className="flex items-center justify-between rounded-xl border border-stone-200 bg-white p-4"
               >
                 <div>
-                  <p className="font-semibold text-stone-800">{h.categoryName}</p>
+                  <p className="font-semibold text-stone-800">{h.tagName}</p>
                   <p className="text-xs text-stone-400">
                     {new Date(h.date).toLocaleString('vi-VN')} ·{' '}
                     {h.difficulty === 'hon-hop' ? 'Hỗn hợp' : h.difficulty}

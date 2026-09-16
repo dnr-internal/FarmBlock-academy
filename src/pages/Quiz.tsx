@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { categories, getCategory } from '../data/categories'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { quizQuestions } from '../data/quizzes'
 import type { Difficulty, QuizQuestion } from '../types'
 import { saveAttempt } from '../lib/storage'
@@ -13,6 +12,8 @@ const difficultyLabels: Record<Difficulty, string> = {
   kho: 'Khó',
 }
 
+const QUIZ_TAGS = Array.from(new Set(quizQuestions.flatMap((q) => q.tags))).sort()
+
 function shuffle<T>(arr: T[]): T[] {
   const copy = [...arr]
   for (let i = copy.length - 1; i > 0; i--) {
@@ -23,11 +24,12 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export default function Quiz() {
-  const { categoryId: paramCategory } = useParams()
+  const [searchParams] = useSearchParams()
+  const paramTag = searchParams.get('tag')
   const navigate = useNavigate()
 
   const [stage, setStage] = useState<Stage>('setup')
-  const [categoryId, setCategoryId] = useState<string>(paramCategory ?? 'tong-hop')
+  const [tagFilter, setTagFilter] = useState<string>(paramTag && QUIZ_TAGS.includes(paramTag) ? paramTag : 'tong-hop')
   const [difficulty, setDifficulty] = useState<Difficulty | 'hon-hop'>('hon-hop')
   const [questionCount, setQuestionCount] = useState(10)
   const [questions, setQuestions] = useState<QuizQuestion[]>([])
@@ -36,10 +38,10 @@ export default function Quiz() {
   const [answers, setAnswers] = useState<(number | null)[]>([])
 
   const pool = useMemo(() => {
-    let base = categoryId === 'tong-hop' ? quizQuestions : quizQuestions.filter((q) => q.categoryId === categoryId)
+    let base = tagFilter === 'tong-hop' ? quizQuestions : quizQuestions.filter((q) => q.tags.includes(tagFilter))
     if (difficulty !== 'hon-hop') base = base.filter((q) => q.difficulty === difficulty)
     return base
-  }, [categoryId, difficulty])
+  }, [tagFilter, difficulty])
 
   function startQuiz() {
     const count = Math.min(questionCount, pool.length)
@@ -73,11 +75,9 @@ export default function Quiz() {
       (acc, q, i) => acc + (answers[i] === q.correctIndex ? 1 : 0),
       0,
     )
-    const cat = categoryId === 'tong-hop' ? null : getCategory(categoryId)
     saveAttempt({
       id: `${Date.now()}`,
-      categoryId: categoryId === 'tong-hop' ? 'tong-hop' : (categoryId as never),
-      categoryName: cat ? cat.name : 'Tổng hợp mọi chủ đề',
+      tagName: tagFilter === 'tong-hop' ? 'Tổng hợp mọi chủ đề' : tagFilter,
       score,
       total: questions.length,
       percent: Math.round((score / questions.length) * 100),
@@ -104,28 +104,28 @@ export default function Quiz() {
 
         <div>
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-stone-400">Chủ đề</h2>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => setCategoryId('tong-hop')}
-              className={`rounded-xl border p-3 text-left text-sm font-medium transition ${
-                categoryId === 'tong-hop'
+              onClick={() => setTagFilter('tong-hop')}
+              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                tagFilter === 'tong-hop'
                   ? 'border-brand-600 bg-brand-50 text-brand-800'
                   : 'border-stone-200 bg-white text-stone-600 hover:border-brand-300'
               }`}
             >
               🎯 Tổng hợp
             </button>
-            {categories.map((cat) => (
+            {QUIZ_TAGS.map((tag) => (
               <button
-                key={cat.id}
-                onClick={() => setCategoryId(cat.id)}
-                className={`rounded-xl border p-3 text-left text-sm font-medium transition ${
-                  categoryId === cat.id
+                key={tag}
+                onClick={() => setTagFilter(tag)}
+                className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                  tagFilter === tag
                     ? 'border-brand-600 bg-brand-50 text-brand-800'
                     : 'border-stone-200 bg-white text-stone-600 hover:border-brand-300'
                 }`}
               >
-                {cat.icon} {cat.shortName}
+                {tag}
               </button>
             ))}
           </div>
@@ -189,7 +189,6 @@ export default function Quiz() {
 
   if (stage === 'playing') {
     const question = questions[currentIndex]
-    const cat = getCategory(question.categoryId)
     return (
       <div className="mx-auto max-w-2xl space-y-6">
         <div className="flex items-center justify-between text-sm text-stone-500">
@@ -197,7 +196,7 @@ export default function Quiz() {
             Câu {currentIndex + 1}/{questions.length}
           </span>
           <span className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium">
-            {cat?.icon} {cat?.shortName} · {difficultyLabels[question.difficulty]}
+            {question.tags.join(', ')} · {difficultyLabels[question.difficulty]}
           </span>
         </div>
 
