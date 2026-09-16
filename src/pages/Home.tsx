@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { categories } from '../data/categories'
+import { TAGS } from '../data/tags'
 import { articles } from '../data/articles'
 import { quizQuestions } from '../data/quizzes'
 
 export default function Home() {
+  const latestArticles = articles.slice(0, 6)
+
   return (
     <div className="space-y-16">
       <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-800 via-brand-700 to-brand-500 px-6 py-14 text-white sm:px-12">
@@ -15,8 +17,8 @@ export default function Home() {
             Tra cứu kiến thức nông nghiệp &amp; công nghệ cao, kiểm tra hiểu biết của bạn
           </h1>
           <p className="mt-4 text-base text-brand-50 sm:text-lg">
-            FarmBlock Academy giúp bạn tìm hiểu về trồng trọt, chăn nuôi, IoT, AI, blockchain truy xuất
-            nguồn gốc và nông nghiệp bền vững — sau đó làm quiz để tự đánh giá mức độ am hiểu.
+            FarmBlock Academy giúp bạn tìm hiểu về đất, nước, dinh dưỡng cây trồng và ứng dụng công nghệ
+            trong nông nghiệp — sau đó làm quiz để tự đánh giá mức độ am hiểu.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -36,7 +38,7 @@ export default function Home() {
       </section>
 
       <section className="grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
-        <Stat label="Danh mục" value={categories.length} />
+        <Stat label="Chủ đề" value={TAGS.length} />
         <Stat label="Bài viết kiến thức" value={articles.length} />
         <Stat label="Câu hỏi quiz" value={quizQuestions.length} />
         <Stat label="Chi phí" value="0đ" />
@@ -44,25 +46,46 @@ export default function Home() {
 
       <section>
         <div className="mb-6 flex items-end justify-between">
-          <h2 className="text-2xl font-bold text-stone-800">Chủ đề nổi bật</h2>
+          <h2 className="text-2xl font-bold text-stone-800">Lọc theo chủ đề</h2>
           <Link to="/thu-vien" className="text-sm font-medium text-brand-700 hover:underline">
-            Xem tất cả →
+            Xem tất cả bài viết →
           </Link>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((cat) => (
+        <div className="flex flex-wrap gap-2">
+          {TAGS.map((tag) => (
             <Link
-              key={cat.id}
-              to={`/thu-vien/${cat.id}`}
-              className="group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              key={tag}
+              to={`/thu-vien?tag=${encodeURIComponent(tag)}`}
+              className="rounded-full border border-stone-200 bg-white px-4 py-1.5 text-sm font-medium text-stone-600 transition hover:border-brand-300 hover:text-brand-700"
             >
-              <div
-                className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br text-2xl text-white ${cat.color}`}
-              >
-                {cat.icon}
+              {tag}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="mb-6 text-2xl font-bold text-stone-800">Bài viết mới nhất</h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {latestArticles.map((article) => (
+            <Link
+              key={article.slug}
+              to={`/thu-vien/bai-viet/${article.slug}`}
+              className="flex flex-col rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <div className="mb-2 flex flex-wrap gap-1.5">
+                {article.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex w-fit items-center rounded-full bg-stone-100 px-2.5 py-0.5 text-xs font-medium text-stone-500"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
-              <h3 className="font-semibold text-stone-800 group-hover:text-brand-700">{cat.name}</h3>
-              <p className="mt-1.5 text-sm text-stone-500">{cat.description}</p>
+              <h3 className="font-semibold text-stone-800">{article.title}</h3>
+              <p className="mt-1.5 flex-1 text-sm text-stone-500">{article.summary}</p>
+              <span className="mt-3 text-xs text-stone-400">📖 {article.readMinutes} phút đọc</span>
             </Link>
           ))}
         </div>

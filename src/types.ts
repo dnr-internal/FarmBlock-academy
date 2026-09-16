@@ -1,23 +1,6 @@
-export type CategoryId =
-  | 'trong-trot'
-  | 'chan-nuoi'
-  | 'agtech'
-  | 'du-lieu-ai'
-  | 'blockchain'
-  | 'ben-vung'
-
-export interface Category {
-  id: CategoryId
-  name: string
-  shortName: string
-  description: string
-  icon: string
-  color: string
-}
-
 export interface Article {
   slug: string
-  categoryId: CategoryId
+  tags: string[]
   title: string
   summary: string
   readMinutes: number
@@ -28,7 +11,7 @@ export type Difficulty = 'de' | 'trung-binh' | 'kho'
 
 export interface QuizQuestion {
   id: string
-  categoryId: CategoryId
+  tags: string[]
   difficulty: Difficulty
   question: string
   options: string[]
@@ -38,8 +21,7 @@ export interface QuizQuestion {
 
 export interface QuizAttempt {
   id: string
-  categoryId: CategoryId | 'tong-hop'
-  categoryName: string
+  tagName: string
   score: number
   total: number
   percent: number

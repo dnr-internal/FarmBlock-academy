@@ -1,6 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { getArticle, getArticlesByCategory } from '../data/articles'
-import { getCategory } from '../data/categories'
+import { articles, getArticle } from '../data/articles'
 
 export default function ArticleDetail() {
   const { slug } = useParams()
@@ -8,8 +7,10 @@ export default function ArticleDetail() {
 
   if (!article) return <Navigate to="/thu-vien" replace />
 
-  const category = getCategory(article.categoryId)
-  const related = getArticlesByCategory(article.categoryId).filter((a) => a.slug !== article.slug)
+  const related = articles
+    .filter((a) => a.slug !== article.slug && a.tags.some((t) => article.tags.includes(t)))
+    .slice(0, 4)
+  const primaryTag = article.tags[0]
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
@@ -17,16 +18,20 @@ export default function ArticleDetail() {
         <Link to="/thu-vien" className="hover:text-brand-700">
           Thư viện
         </Link>
-        {' / '}
-        <Link to={`/thu-vien/${category?.id}`} className="hover:text-brand-700">
-          {category?.shortName}
-        </Link>
       </nav>
 
       <header>
-        <span className="mb-3 inline-flex items-center gap-1 rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-500">
-          {category?.icon} {category?.name}
-        </span>
+        <div className="mb-3 flex flex-wrap gap-2">
+          {article.tags.map((tag) => (
+            <Link
+              key={tag}
+              to={`/thu-vien?tag=${encodeURIComponent(tag)}`}
+              className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-500 hover:bg-stone-200"
+            >
+              {tag}
+            </Link>
+          ))}
+        </div>
         <h1 className="text-3xl font-extrabold leading-tight text-stone-800">{article.title}</h1>
         <p className="mt-3 text-stone-500">{article.summary}</p>
         <p className="mt-2 text-xs text-stone-400">📖 {article.readMinutes} phút đọc</p>
@@ -46,12 +51,14 @@ export default function ArticleDetail() {
 
       <div className="rounded-2xl bg-brand-50 p-6 text-center">
         <p className="font-medium text-brand-800">Đã đọc xong? Kiểm tra ngay hiểu biết của bạn!</p>
-        <Link
-          to={`/quiz/${category?.id}`}
-          className="mt-3 inline-block rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
-        >
-          Làm quiz chủ đề {category?.shortName} →
-        </Link>
+        {primaryTag && (
+          <Link
+            to={`/quiz?tag=${encodeURIComponent(primaryTag)}`}
+            className="mt-3 inline-block rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
+          >
+            Làm quiz chủ đề {primaryTag} →
+          </Link>
+        )}
       </div>
 
       {related.length > 0 && (
