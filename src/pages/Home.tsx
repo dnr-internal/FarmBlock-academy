@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { TAGS } from '../data/tags'
 import { articles } from '../data/articles'
 import { quizQuestions } from '../data/quizzes'
+import AcademyLinkBanner from '../components/AcademyLinkBanner'
 
 export default function Home() {
   const latestArticles = articles.slice(0, 6)
@@ -90,6 +91,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <AcademyLinkBanner />
 
       <section className="rounded-3xl border border-stone-200 bg-white p-8 text-center">
         <h2 className="text-2xl font-bold text-stone-800">Sẵn sàng thử thách kiến thức của bạn?</h2>
