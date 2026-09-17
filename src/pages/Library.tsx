@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { TAGS } from '../data/tags'
 import { articles } from '../data/articles'
+import AcademyLinkBanner from '../components/AcademyLinkBanner'
 
 export default function Library() {
   const [searchParams] = useSearchParams()
@@ -29,6 +30,8 @@ export default function Library() {
             : 'Tổng hợp kiến thức về nông nghiệp và ứng dụng công nghệ cao.'}
         </p>
       </div>
+
+      <AcademyLinkBanner />
 
       <input
         type="search"
